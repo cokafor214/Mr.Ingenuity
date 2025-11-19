@@ -1,0 +1,8 @@
+[
+  { "id": "p1", "title": "Wireless Headphones", "price": 99.99, "image": "" },
+  { "id": "p2", "title": "Mechanical Keyboard", "price": 129.99, "image": "" },
+  { "id": "p3", "title": "USB-C Hub", "price": 49.99, "image": "" },
+  { "id": "p4", "title": "Smart Watch", "price": 199.99, "image": "" },
+  { "id": "p5", "title": "Portable SSD", "price": 89.99, "image": "" },
+  { "id": "p6", "title": "Gaming Mouse", "price": 59.99, "image": "" }
+]
