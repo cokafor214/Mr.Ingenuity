@@ -1,1 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ernest Ingenuity — Official MySpace-Style Page</title>
+  <meta name="description" content="Ernest Ingenuity: retro vibes, modern innovation. Official single-page profile." />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #0c0f15;
+      --bg-panel: #121726;
+      --bg-accent: #1b2240;
+      --primary: #6cf;
+      --primary-2: #a1e8ff;
+      --text: #e9f1ff;
+      --muted: #98a3b8;
+      --highlight: #ff7bd8;
+      --success: #6fe3a5;
+      --warning: #ffd66b;
+      --danger: #ff7a7a;
+      --shadow: rgba(0,0,0,0.35);
+      --ring: rgba(108, 204, 255, 0.45);
+      --radius: 12px;
+      --grid-gap: 16px;
+      --maxw: 1100px;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: linear-gradient(180deg, #0c0f15 0%, #121726 60%, #10131c 100%); color: var(--text); font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; }
+    a { color: var(--primary); text-decoration: none; }
+    a:hover { color: var(--primary-2); text-decoration: underline; }
+
+    /* Retro header */
+    header {
+      position: relative;
+      background: linear-gradient(135deg, #0f1424 0%, #202b55 50%, #121726 100%);
+      border-bottom: 1px solid #243057;
+      box-shadow: 0 8px 24px var(--shadow);
+    }
+    .glow-grid {
+      position: absolute; inset: 0;
+      background-image: radial-gradient(rgba(108,204,255,0.18) 1px, transparent 1px);
+      background-size: 22px 22px;
+      opacity: 0.35;
+      pointer-events: none;
+    }
+    .container { max-width: var(--maxw); margin: 0 auto; padding: 20px; }
+
+    .branding {
+      display: flex; align-items: center; gap: 16px; padding: 28px 0;
+    }
+    .avatar {
+      width: 84px; height: 84px; border-radius: 8px;
+      background: url('https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=400&auto=format&fit=crop') center/cover no-repeat;
+      border: 2px solid #2f3c68; box-shadow: 0 6px 18px var(--shadow);
+    }
+    .title-block h1 {
+      margin: 0; font-weight: 800; letter-spacing: 0.5px;
+      font-size: 28px;
+    }
+    .title-block h1 .retro {
+      font-family: "Press Start 2P", monospace; font-size: 18px; color: var(--highlight);
+      display: block; margin-bottom: 6px;
+    }
+    .title-block .tagline {
+      margin: 6px 0 0; color: var(--muted); font-size: 15px;
+    }
+
+    nav {
+      display: flex; flex-wrap: wrap; gap: 10px; margin: 16px 0 6px;
+    }
+    nav a {
+      padding: 10px 14px; border-radius: 8px; background: #0e1528; border: 1px solid #243057;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.06), 0 3px 12px var(--shadow);
+      font-weight: 600; font-size: 14px;
+    }
+    nav a.active { background: #182044; border-color: #32437a; color: var(--primary-2); }
+
+    /* Page layout */
+    main { padding: 24px 0 60px; }
+    .grid {
+      display: grid; grid-template-columns: 1.2fr 1fr; gap: var(--grid-gap);
+    }
+    @media (max-width: 980px) {
+      .grid { grid-template-columns: 1fr; }
+    }
+
+    .panel {
+      background: linear-gradient(180deg, var(--bg-panel), #0e1426);
+      border: 1px solid #243057; border-radius: var(--radius);
+      box-shadow: 0 10px 30px var(--shadow);
+      overflow: hidden;
+    }
+    .panel .panel-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 18px; border-bottom: 1px solid #243057; background: rgba(20,28,48,0.6);
+    }
+    .panel .panel-header h2 {
+      margin: 0; font-size: 18px; letter-spacing: 0.2px;
+    }
+    .panel .panel-body { padding: 18px; }
+
+    /* About */
+    .about-grid { display: grid; grid-template-columns: 160px 1fr; gap: 16px; }
+    @media (max-width: 680px) { .about-grid { grid-template-columns: 1fr; } }
+    .profile-pic {
+      width: 100%; border-radius: 10px; aspect-ratio: 1; object-fit: cover;
+      border: 2px solid #33467f; box-shadow: 0 6px 18px var(--shadow);
+    }
+    .details p { margin: 10px 0; color: var(--muted); }
+
+    /* Spotify block */
+    .player-wrap {
+      display: grid; grid-template-columns: 1fr; gap: 12px;
+    }
+    .player-meta {
+      display: flex; align-items: center; gap: 12px;
+      color: var(--muted);
+    }
+    .status-dot {
+      width: 10px; height: 10px; border-radius: 50%; background: var(--success);
+      box-shadow: 0 0 10px var(--success);
+    }
+    .iframe-spotify {
+      width: 100%; height: 152px; border: 0; border-radius: 10px;
+      box-shadow: 0 10px 26px var(--shadow);
+      filter: drop-shadow(0 0 0 transparent);
+    }
+
+    /* Friends */
+    .friends {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
+    }
+    @media (max-width: 900px) { .friends { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 640px) { .friends { grid-template-columns: repeat(2, 1fr); } }
+    .friend-card {
+      background: #0f162b; border: 1px solid #243057; border-radius: 10px; overflow: hidden;
+      box-shadow: 0 8px 18px var(--shadow);
+    }
+    .friend-card img { width: 100%; aspect-ratio: 1; object-fit: cover; }
+    .friend-card .name { padding: 10px; font-weight: 700; text-align: center; }
+
+    /* Comments */
+    .comment {
+      display: grid; grid-template-columns: 60px 1fr; gap: 12px;
+      padding: 12px; border-radius: 10px; background: #0f162b; border: 1px solid #243057;
+    }
+    .comment + .comment { margin-top: 12px; }
+    .comment .avatar-sm {
+      width: 60px; height: 60px; border-radius: 8px; object-fit: cover; border: 2px solid #33467f;
+    }
+    .comment .bubble {
+      background: #0c1222; border: 1px solid #233055; padding: 10px; border-radius: 10px;
+    }
+    .comment .meta { font-size: 12px; color: var(--muted); margin-bottom: 6px; }
+
+    /* Contact */
+    .contact-actions {
+      display: flex; flex-wrap: wrap; gap: 10px;
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px; padding: 10px 14px; border-radius: 8px;
+      background: #182044; border: 1px solid #32437a; color: var(--text); font-weight: 700;
+      box-shadow: 0 6px 16px var(--shadow);
+      transition: transform 120ms ease, box-shadow 120ms ease, background 120ms ease;
+    }
+    .btn:hover { transform: translateY(-1px); box-shadow: 0 10px 22px var(--shadow); }
+    .btn.secondary { background: #0e1528; border-color: #243057; font-weight: 600; }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid #243057; padding: 20px 0; color: var(--muted);
+      background: radial-gradient(1200px 300px at 50% 0%, rgba(108,204,255,0.12), transparent), #0c0f15;
+    }
+
+    /* Subtle sparkle effect */
+    .sparkle {
+      position: relative;
+    }
+    .sparkle::after {
+      content: "";
+      position: absolute; inset: -2px;
+      background: radial-gradient(circle at 10% 20%, rgba(255,255,255,0.08), transparent 40%),
+                  radial-gradient(circle at 80% 30%, rgba(108,204,255,0.12), transparent 40%),
+                  radial-gradient(circle at 30% 80%, rgba(255,122,216,0.08), transparent 40%);
+      border-radius: inherit; pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="glow-grid"></div>
+    <div class="container">
+      <div class="branding">
+        <div class="avatar" aria-hidden="true"></div>
+        <div class="title-block">
+          <h1><span class="retro">MySpace Profile</span>Ernest Ingenuity</h1>
+          <p class="tagline">Retro vibes. Modern grit. Crafting ingenious business solutions that actually ship.</p>
+        </div>
+      </div>
+
+      <nav aria-label="Primary">
+        <a href="#about" class="active">About</a>
+        <a href="#music">Music</a>
+        <a href="#friends">Top Friends</a>
+        <a href="#comments">Comments</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container grid">
+
+      <!-- Left column -->
+      <section id="about" class="panel sparkle" aria-labelledby="about-title">
+        <div class="panel-header">
+          <h2 id="about-title">About Ernest Ingenuity</h2>
+          <small style="color: var(--muted);">Dallas–Fort Worth | Since 2025</small>
+        </div>
+        <div class="panel-body">
+          <div class="about-grid">
+            <img class="profile-pic" src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=600&auto=format&fit=crop" alt="Ernest Ingenuity office desk with retro aesthetic">
+            <div class="details">
+              <p><strong>Mission:</strong> We turn complex ideas into shippable products—fast, pragmatic, and delightfully inventive.</p>
+              <p><strong>What we do:</strong> Product strategy, UX prototyping, creative engineering sprints, and content systems. Think: startup speed with enterprise steadiness.</p>
+              <p><strong>Signature:</strong> A builder’s mindset wrapped in a throwback internet soul—because personality matters.</p>
+              <p><strong>Currently:</strong> Open for limited collaborations. Ask about our “Ingenuity in 10 Days” sprint.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right column -->
+      <section id="music" class="panel" aria-labelledby="music-title">
+        <div class="panel-header">
+          <h2 id="music-title">Featured track</h2>
+          <small style="color: var(--muted);">Powered by Spotify</small>
+        </div>
+        <div class="panel-body">
+          <div class="player-wrap">
+            <div class="player-meta">
+              <span class="status-dot" aria-hidden="true"></span>
+              <span>Now spinning: “Focus Mode” — Ernest’s late-night build playlist</span>
+            </div>
+
+            <!-- Replace src with your Spotify track/album/playlist embed -->
+            <iframe class="iframe-spotify" style="border-radius:12px"
+              src="https://open.spotify.com/embed/track/7GhIk7Il098yCjg4BQjzvb?utm_source=generator"
+              title="Spotify player"
+              loading="lazy"
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture">
+            </iframe>
+
+            <p style="color: var(--muted); font-size: 13px;">
+              Want your own track? In Spotify, click “Share” → “Embed” and paste it here.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Left column continued -->
+      <section id="friends" class="panel" aria-labelledby="friends-title">
+        <div class="panel-header">
+          <h2 id="friends-title">Top friends</h2>
+          <small style="color: var(--muted);">Partners & collaborators</small>
+        </div>
+        <div class="panel-body">
+          <div class="friends">
+            <div class="friend-card">
+              <img src="https://images.unsplash.com/photo-1543269664-76bc3997d9ea?q=80&w=600&auto=format&fit=crop" alt="Collaborator team">
+              <div class="name">Proto Labs</div>
+            </div>
+            <div class="friend-card">
+              <img src="https://images.unsplash.com/photo-1551836022-4c4c79ecde51?q=80&w=600&auto=format&fit=crop" alt="Design studio">
+              <div class="name">Pixel Forge</div>
+            </div>
+            <div class="friend-card">
+              <img src="https://images.unsplash.com/photo-1529333166437-7750aa0c4f3c?q=80&w=600&auto=format&fit=crop" alt="Marketing partner">
+              <div class="name">Signal & Story</div>
+            </div>
+            <div class="friend-card">
+              <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=600&auto=format&fit=crop" alt="Hardware workshop">
+              <div class="name">Garage Nine</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right column continued -->
+      <section id="comments" class="panel" aria-labelledby="comments-title">
+        <div class="panel-header">
+          <h2 id="comments-title">Comments</h2>
+          <small style="color: var(--muted);">Leave a note</small>
+        </div>
+        <div class="panel-body">
+          <div class="comment">
+            <img class="avatar-sm" src="https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?q=80&w=200&auto=format&fit=crop" alt="Client avatar">
+            <div class="bubble">
+              <div class="meta">From: Alex • 2 days ago</div>
+              <div>Ernest shipped a working prototype in a week and made it look easy. Big fan of the sprint format.</div>
+            </div>
+          </div>
+          <div class="comment">
+            <img class="avatar-sm" src="https://images.unsplash.com/photo-1502764613149-7f1d229e2301?q=80&w=200&auto=format&fit=crop" alt="Partner avatar">
+            <div class="bubble">
+              <div class="meta">From: Maya • 1 week ago</div>
+              <div>Thoughtful, creative, and practical. They translated vision into clean interactions that users loved.</div>
+            </div>
+          </div>
+
+          <!-- Faux comment form (non-functional) -->
+          <form id="comment-form" style="margin-top: 14px;">
+            <label for="comment-text" style="display:block; margin-bottom:6px; color: var(--muted);">Add a comment</label>
+            <textarea id="comment-text" rows="3" style="width:100%; border-radius:10px; border:1px solid #243057; background:#0e1426; color: var(--text); padding:10px;" placeholder="Say something nice…"></textarea>
+            <div style="margin-top:8px;">
+              <button type="button" class="btn" onclick="fakePost()">Post</button>
+              <button type="reset" class="btn secondary">Clear</button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <!-- Full-width contact -->
+      <section id="contact" class="panel" aria-labelledby="contact-title" style="grid-column: 1 / -1;">
+        <div class="panel-header">
+          <h2 id="contact-title">Contact Ernest</h2>
+          <small style="color: var(--muted);">Let’s build something you’re proud of</small>
+        </div>
+        <div class="panel-body">
+          <div class="contact-actions">
+            <a class="btn" href="mailto:hello@ernestingenuity.com">Email</a>
+            <a class="btn secondary" href="https://cal.com/" target="_blank" rel="noopener">Book a call</a>
+            <a class="btn secondary" href="#about">Capabilities</a>
+            <a class="btn" href="#music">Playlist</a>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:8px;">
+        <div>© <span id="year"></span> Ernest Ingenuity. All rights reserved.</div>
+        <div>Made with a touch of MySpace nostalgia.</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Smooth scroll & active tab
+    document.querySelectorAll('nav a').forEach(a => {
+      a.addEventListener('click', e => {
+        const href = a.getAttribute('href');
+        if (href.startsWith('#')) {
+          e.preventDefault();
+          document.querySelector(href)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          document.querySelectorAll('nav a').forEach(x => x.classList.remove('active'));
+          a.classList.add('active');
+        }
+      });
+    });
+
+    // Faux comment posting (front-end only)
+    function fakePost() {
+      const input = document.getElementById('comment-text');
+      const text = input.value.trim();
+      if (!text) { input.focus(); return; }
+      const list = document.getElementById('comments').querySelector('.panel-body');
+      const wrap = document.createElement('div');
+      wrap.className = 'comment';
+      wrap.innerHTML = `
+        <img class="avatar-sm" src="https://images.unsplash.com/photo-1527980965255-d3b416303d12?q=80&w=200&auto=format&fit=crop" alt="New commenter avatar">
+        <div class="bubble">
+          <div class="meta">From: You • just now</div>
+          <div>${text.replace(/[<>&]/g, s => ({'<':'&lt;','>':'&gt;','&':'&amp;'}[s]))}</div>
+        </div>
+      `;
+      list.appendChild(wrap);
+      input.value = '';
+      input.focus();
+    }
+
+    // Year in footer
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
 
